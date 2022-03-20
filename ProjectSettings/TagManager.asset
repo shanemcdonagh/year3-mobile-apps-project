@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy1
   layers:
   - Default
   - TransparentFX
@@ -17,7 +18,7 @@ TagManager:
   - Power Ups
   - Foreground
   - Background
-  - 
+  - DeadEnemy
   - 
   - 
   - 
@@ -38,11 +39,11 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Default
-    uniqueID: 0
-    locked: 0
   - name: Background
     uniqueID: 325567613
+    locked: 0
+  - name: Default
+    uniqueID: 0
     locked: 0
   - name: Middleground
     uniqueID: 452371567
@@ -50,6 +51,6 @@ TagManager:
   - name: Foreground
     uniqueID: 1049672349
     locked: 0
-  - name: Player
+  - name: Character
     uniqueID: 882708209
     locked: 0

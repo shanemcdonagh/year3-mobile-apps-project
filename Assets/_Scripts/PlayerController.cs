@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour
     {
         processMovement();
         processJumping();
+        onLanding();
     }
 
     // Method: Checked on each frame, processes when player presses any movement key
@@ -74,26 +75,34 @@ public class PlayerController : MonoBehaviour
     private void processJumping()
     {
         
-        //bool falling = false;
-        
         if(!contact.IsTouchingLayers(LayerMask.GetMask("Foreground")))
         {
-            Debug.Log("Bruh not touching fam");
+          
             return;
         }
         
         if(Input.GetButtonDown("Jump"))
         { 
+            Debug.Log("jumping");
             // Create movement on the y axis
             Vector2 jump = new Vector2(0f,jumpingVelocity);
 
             // Adds to the current velocity of the GameObject (avoids changing x velocity)
             rigid.velocity+= jump;
-
-            bool jumping = Mathf.Abs(rigid.velocity.y) > Mathf.Epsilon;
-
-            // Set condition in jumping animation based on if the player is moving/idle
-            //playerAnimator.SetBool("Jumping",jumping);
         }
+
+        bool jumping = rigid.velocity.y > 0.1;
+
+        // Set condition in jumping animation based on if the player is moving/idle
+        playerAnimator.SetBool("Jumping",jumping);
+    }
+
+    public void onLanding()
+    {
+        // if(contact.IsTouchingLayers(LayerMask.GetMask("Foreground")))
+        // {
+        //         Debug.Log("not jumping");
+        //         playerAnimator.SetBool("Jumping",false);
+        // }
     }
 }
