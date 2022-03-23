@@ -7138,6 +7138,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 280415365430027918, guid: aa913c7fb9f6a9345bf8fa019f895e07, type: 3}
+      propertyPath: m_LocalScale.x
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 280415365430027918, guid: aa913c7fb9f6a9345bf8fa019f895e07, type: 3}
       propertyPath: m_LocalPosition.x
       value: -78.86279
       objectReference: {fileID: 0}
@@ -7189,8 +7193,29 @@ PrefabInstance:
       propertyPath: m_Offset.y
       value: -0.14356065
       objectReference: {fileID: 0}
+    - target: {fileID: 2298122824997989231, guid: aa913c7fb9f6a9345bf8fa019f895e07, type: 3}
+      propertyPath: range
+      value: 1.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2298122824997989231, guid: aa913c7fb9f6a9345bf8fa019f895e07, type: 3}
+      propertyPath: boxCollider
+      value: 
+      objectReference: {fileID: 280415367336401665}
+    - target: {fileID: 2298122824997989231, guid: aa913c7fb9f6a9345bf8fa019f895e07, type: 3}
+      propertyPath: colliderRange
+      value: 0.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 2298122824997989231, guid: aa913c7fb9f6a9345bf8fa019f895e07, type: 3}
+      propertyPath: playerLayer.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa913c7fb9f6a9345bf8fa019f895e07, type: 3}
+--- !u!61 &280415367336401665 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 280415365430027920, guid: aa913c7fb9f6a9345bf8fa019f895e07, type: 3}
+  m_PrefabInstance: {fileID: 280415367336401664}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7528120269599997840
 PrefabInstance:
   m_ObjectHideFlags: 0

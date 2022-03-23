@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Reference: https://youtu.be/sPiVz1k-fEs
+// Reference: https://youtu.be/d002CljR-KU
 // This video was used to understand and apply attack damage and how to play the necessary animations
 
 public class Enemy : MonoBehaviour
@@ -11,27 +12,48 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int maxHealth = 90;
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] private float attackRate = 2f;
-    [SerializeField] private float attackTime = 0f;
+    [SerializeField] private float range;
+    [SerializeField] private float colliderRange;
+    [SerializeField] private float attackDamage = 2f;
+    [SerializeField] private BoxCollider2D boxCollider;
     private int currHealth;
-    private Animator enemyAnimator;
-    private BoxCollider2D boxCollider;
+    private float attackTime = Mathf.Infinity;
 
+    //private Health playerHealth;
+
+    private Animator enemyAnimator;
 
     // Start is called before the first frame update
     void Start()
     {
         enemyAnimator = GetComponent<Animator>();
-        boxCollider = GetComponent<BoxCollider2D>();
         currHealth = maxHealth;
     }
 
+    void Update()
+    {
+        attackTime += Time.deltaTime;
+
+        // If: The player is in the line of sight
+        if (PlayerDetected())
+        {
+            // Attack when cooldown has finished
+            if (attackTime >= attackRate)
+            {
+                processAttack();
+            }
+        }
+
+    }
+
+    // Function: When called, deals damage to the Enemy
     public void TakeDamage(int damage)
     {
-        currHealth -=damage;
+        currHealth -= damage;
 
         enemyAnimator.SetTrigger("Hurting");
 
-        if(currHealth <= 0)
+        if (currHealth <= 0)
         {
             Death();
         }
@@ -39,11 +61,11 @@ public class Enemy : MonoBehaviour
 
     private void Death()
     {
-        enemyAnimator.SetBool("Dying",true);
+        enemyAnimator.SetBool("Dying", true);
 
         // Set the enemy to a layer that the player does not collide with
         gameObject.layer = 12;
-        
+
         // Disable the current script on the GameObject
         this.enabled = false;
 
@@ -51,23 +73,37 @@ public class Enemy : MonoBehaviour
 
     private void processAttack()
     {
-        if(Time.time >= attackTime)
-        {
-            attackTime = Time.time + 1f / attackRate;
-        }
+       // Attack
+       enemyAnimator.SetTrigger("");
     }
 
     // Determines if player is in the enemies line of sight 
     private bool PlayerDetected()
     {
-        RaycastHit2D detect = Physics2D.BoxCast(boxCollider.bounds.center,
-        boxCollider.bounds.size,0,Vector2.left,0,playerLayer);
-        
+        Vector3 boxSize = new Vector3(boxCollider.bounds.size.x * range, boxCollider.bounds.size.y,boxCollider.bounds.size.z);
+
+        // Creates a boxcast based on enemy position (collider range and boxSize allows to customize the size of the raycast field through the inspector)
+        RaycastHit2D detect = Physics2D.BoxCast(boxCollider.bounds.center + transform.right * range * transform.localScale.x * colliderRange,
+        boxSize, 0, Vector2.left, 0, playerLayer);
+
+        if(!detect.collider)
+        {
+
+        }
+
         return detect.collider;
     }
 
-    void OnDrawGizmosSelected()
+    // Draws a wireframe on the box collider of the enemy
+    private void OnDrawGizmos()
     {
-        Gizmos.DrawWireCube(boxCollider.bounds.center,boxCollider.bounds.size);
+        Vector3 boxSize = new Vector3(boxCollider.bounds.size.x * range, boxCollider.bounds.size.y,boxCollider.bounds.size.z);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireCube(boxCollider.bounds.center + transform.right * range * transform.localScale.x * colliderRange, boxSize);
+    }
+
+    private void hurtPlayer()
+    {
+
     }
 }
