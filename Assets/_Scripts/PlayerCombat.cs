@@ -65,7 +65,7 @@ public class PlayerCombat : MonoBehaviour
     }
 
     // Draws a wireframe around the attackpoint for adjusting purposes (only within the Editor)
-    void OnDrawGizmosSelected()
+    private void OnDrawGizmosSelected()
     {
         if(attackPoint == null)
         {
