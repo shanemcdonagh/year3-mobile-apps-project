@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
 {
 
     [SerializeField] private int maxHealth = 3;
+    [SerializeField] private int points = 10;
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] private float attackRate = 0.6f;
     [SerializeField] private float range;
@@ -20,6 +21,15 @@ public class Enemy : MonoBehaviour
     private float attackTime = Mathf.Infinity;
     private PlayerHealth playerHealth;
     private Animator enemyAnimator;
+
+    public int EnemyPoints { get {return points;}}
+    
+    // Acts as a function container 
+    public delegate void KilledEnemy(Enemy em);
+
+    // A listener method, which is trigger when an enemy is killed by the player
+    // Can hold any function that matches the KilledEnemy signature 
+    public static KilledEnemy KilledEnemyEvent;
 
     // Start is called before the first frame update
     void Start()
@@ -69,6 +79,16 @@ public class Enemy : MonoBehaviour
         this.enabled = false;
         GetComponent<EnemyController>().enabled = false;
 
+        // Send a call to the event
+        SendKilledEnemyEvent();
+    }
+
+    private void SendKilledEnemyEvent()
+    {
+        if(KilledEnemyEvent != null)
+        {
+            KilledEnemyEvent(this);
+        }
     }
 
     private void processAttack()

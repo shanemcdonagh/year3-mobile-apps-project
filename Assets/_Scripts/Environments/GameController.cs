@@ -64,12 +64,24 @@ public class GameController : MonoBehaviour
         }
     }
 
-
-
-    public void AddPlayerScore(int score)
+    public void OnKilledEnemyEvent(Enemy e)
     {
-        playerScore+= score;
+        playerScore+= e.EnemyPoints;
         uiUpdate();
     }
+
+    // Function: Executed when object becomes active
+    private void OnEnable()
+    {
+        // Begins listening for any calls made to the event, which then executes the specified function
+        Enemy.KilledEnemyEvent += OnKilledEnemyEvent;
+    }
+
+    // Function: Executed when object becomes inactive
+    private void OnDisable()
+    {
+        Enemy.KilledEnemyEvent -= OnKilledEnemyEvent;
+    }
+
 
 }
