@@ -9,18 +9,16 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
 
-    [SerializeField] private int maxHealth = 90;
+    [SerializeField] private int maxHealth = 3;
     [SerializeField] private LayerMask playerLayer;
-    [SerializeField] private float attackRate = 2f;
+    [SerializeField] private float attackRate = 0.6f;
     [SerializeField] private float range;
     [SerializeField] private float colliderRange;
-    [SerializeField] private float attackDamage = 2f;
+    //[SerializeField] private int attackDamage = 1;
     [SerializeField] private BoxCollider2D boxCollider;
     private int currHealth;
     private float attackTime = Mathf.Infinity;
-
-    //private Health playerHealth;
-
+    private PlayerHealth playerHealth;
     private Animator enemyAnimator;
 
     // Start is called before the first frame update
@@ -50,6 +48,7 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currHealth -= damage;
+        Debug.Log(currHealth);
 
         enemyAnimator.SetTrigger("Hurting");
 
@@ -68,13 +67,14 @@ public class Enemy : MonoBehaviour
 
         // Disable the current script on the GameObject
         this.enabled = false;
+        GetComponent<EnemyController>().enabled = false;
 
     }
 
     private void processAttack()
     {
        // Attack
-       enemyAnimator.SetTrigger("");
+       enemyAnimator.SetTrigger("Attacking");
     }
 
     // Determines if player is in the enemies line of sight 
@@ -86,9 +86,9 @@ public class Enemy : MonoBehaviour
         RaycastHit2D detect = Physics2D.BoxCast(boxCollider.bounds.center + transform.right * range * transform.localScale.x * colliderRange,
         boxSize, 0, Vector2.left, 0, playerLayer);
 
-        if(!detect.collider)
+        if(detect.collider != null)
         {
-
+           playerHealth = detect.transform.GetComponent<PlayerHealth>();
         }
 
         return detect.collider;
@@ -102,8 +102,12 @@ public class Enemy : MonoBehaviour
         Gizmos.DrawWireCube(boxCollider.bounds.center + transform.right * range * transform.localScale.x * colliderRange, boxSize);
     }
 
-    private void hurtPlayer()
+    public void HurtPlayer()
     {
-
+        if(PlayerDetected())
+        {
+            // Decrease player health
+            playerHealth.TakeDamage();
+        }
     }
 }

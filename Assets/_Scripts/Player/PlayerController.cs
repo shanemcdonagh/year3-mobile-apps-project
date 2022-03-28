@@ -7,10 +7,13 @@ public class PlayerController : MonoBehaviour
 
     // SerializeField: Can be modified within the editor, while being kept private
     [SerializeField] private float speed = 15.0f;
+    [SerializeField] private Transform attackPoint;
     [SerializeField] private float leftBound = -11.8f;
     [SerializeField] private float jumpingVelocity = 1.0f;
     private float h;
     private float v;
+
+    private bool facingRight = true;
 
     // Initial instance variables
     private Rigidbody2D rigid;
@@ -35,6 +38,7 @@ public class PlayerController : MonoBehaviour
     {
         processMovement();
         processJumping();
+        processDirection();
         onLanding();
     }
 
@@ -43,17 +47,7 @@ public class PlayerController : MonoBehaviour
     {
         // Retrieve input from user
         h = Input.GetAxis("Horizontal");
-        
-        // Flips the sprite based on direction of movement
-        if(h > 0)
-        {
-            sprite.flipX = false;
-        }
-        else if(h < 0)
-        {
-            sprite.flipX = true;
-        }
-
+  
         // Applies velocity to player based on player input
         rigid.velocity = new Vector2(h * speed,rigid.velocity.y);
 
@@ -69,6 +63,17 @@ public class PlayerController : MonoBehaviour
         // Set position of player based on this
         rigid.position = new Vector2(bH,rigid.position.y);
     
+    }
+
+    private void processDirection()
+    {
+        // Had issues with flipping the attackpoint as well due to original implementation of flipping the player (transform.localScale)
+        // SOLUTION: https://pastebin.com/kYYMvDd2
+       if((h < 0 && facingRight) || (h > 0 && !facingRight))
+       {
+           	facingRight = !facingRight;
+            transform.Rotate(new Vector3(0,180,0));
+       }   
     }
 
     // Method: Checked on each frame, processes when player presses the 'Jump' key

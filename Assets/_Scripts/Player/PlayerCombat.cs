@@ -10,7 +10,8 @@ public class PlayerCombat : MonoBehaviour
 {
     [SerializeField] private Transform attackPoint;
 
-    [SerializeField] private float attackRate = 2f;
+    [SerializeField] private float firstAttackRate = 2f;
+    [SerializeField] private float secondAttackRate = 4f;
      [SerializeField] private float attackTime = 0f;
     [SerializeField] private LayerMask enemyLayers;
     [SerializeField] private float range = 0.5f;
@@ -37,7 +38,13 @@ public class PlayerCombat : MonoBehaviour
             if(Input.GetButtonDown("Fire1"))
             {
                 attack("primary");
-                attackTime = Time.time + 1f / attackRate;
+                attackTime = Time.time + 1f / firstAttackRate;
+            }
+
+            if(Input.GetButtonDown("Fire2"))
+            {
+                attack("secondary");
+                attackTime = Time.time + 1f / firstAttackRate;
             }
         }
     }
@@ -45,14 +52,23 @@ public class PlayerCombat : MonoBehaviour
     // Method: Processes players attack options
     private void attack(string attackType)
     {
+        string trigger = "";
+        
         // If: Primary Attack
         if(attackType == "primary")
         {
             // Play animation
-            playerAnimator.SetTrigger("Attack1");
-            attackDamage = 30;
+            trigger = "Attack1";
+            attackDamage = 1;
+        }
+        else if(attackType == "secondary")
+        {
+            trigger = "Attack2";
+            attackDamage = 2;
         }
         
+        playerAnimator.SetTrigger(trigger);
+
         // Detect which enemies are in range
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, range, enemyLayers);
         
