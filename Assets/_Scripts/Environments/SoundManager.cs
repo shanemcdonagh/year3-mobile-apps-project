@@ -19,7 +19,7 @@ public class SoundManager : MonoBehaviour
     {
         Instance = this;
 
-        SingletonSetup();
+        //SingletonSetup();
 
         //If a player pref was set for audio mute
         if (PlayerPrefs.HasKey(AudioMutePref))

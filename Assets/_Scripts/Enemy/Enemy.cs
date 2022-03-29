@@ -17,7 +17,6 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float colliderRange;
     //[SerializeField] private int attackDamage = 1;
     [SerializeField] private BoxCollider2D boxCollider;
-    [SerializeField] SoundManager soundManager;
     private int currHealth;
     private float attackTime = Mathf.Infinity;
     private PlayerHealth playerHealth;
@@ -75,7 +74,7 @@ public class Enemy : MonoBehaviour
         enemyAnimator.SetBool("Dying", true);
 
         // Play audio
-        soundManager.PlayClip("Enemy Death");
+        SoundManager.Instance.PlayClip("Enemy Death");
 
         // Set the enemy to a layer that the player does not collide with
         gameObject.layer = 12;
