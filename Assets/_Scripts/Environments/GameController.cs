@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI livesText;
     [SerializeField] private TextMeshProUGUI healthText;
     [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private SoundManager soundManager;
 
     private int playerScore = 00000;
     private Animator playerAnimator;
@@ -54,6 +55,7 @@ public class GameController : MonoBehaviour
     {
         var sceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadSceneAsync(sceneIndex);
+        soundManager.PlayClip("Player Death");
         uiUpdate();
 
         // Reload to a new game

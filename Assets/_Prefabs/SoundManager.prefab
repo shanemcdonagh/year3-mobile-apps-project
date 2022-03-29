@@ -1,0 +1,82 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &660707584502893020
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 660707584502893022}
+  - component: {fileID: 1492454066}
+  - component: {fileID: 195391131}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &660707584502893022
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 660707584502893020}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 15.29254, y: 6.591675, z: -1.2780426}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1492454066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 660707584502893020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 390146d22c6bc96478c40c3080077309, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - audioType: 0
+    audioSource: {fileID: 0}
+    audioClip: {fileID: 8300000, guid: 590d782320d69744f984b92f2f5add1c, type: 3}
+    clipName: Enemy Death
+    isLooping: 0
+    playOnAwake: 0
+    volume: 1
+  - audioType: 0
+    audioSource: {fileID: 0}
+    audioClip: {fileID: 8300000, guid: 8be010fabe498b1439f70fbd09453de2, type: 3}
+    clipName: Player Death
+    isLooping: 0
+    playOnAwake: 0
+    volume: 1
+  - audioType: 0
+    audioSource: {fileID: 0}
+    audioClip: {fileID: 8300000, guid: 4933f8a3c43203947ad144f51cfdc026, type: 3}
+    clipName: Player Sword
+    isLooping: 0
+    playOnAwake: 0
+    volume: 1
+  soundFXGroup: {fileID: -1028905225689518218, guid: f3b5695b47e970943a9bb1278c8953bb, type: 2}
+  musicGroup: {fileID: -2966002741999735286, guid: f3b5695b47e970943a9bb1278c8953bb, type: 2}
+--- !u!114 &195391131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 660707584502893020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5d97807853289244813bc7d9ba0b24b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
