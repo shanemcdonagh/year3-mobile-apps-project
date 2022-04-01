@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-     public float playerLives { get; private set; } = 1;
-     [SerializeField] public float playerHealth { get; private set; } = 5;
-     private Animator playerAnimator;
-   
+    [SerializeField] private float maxHealth = 3;
+    public float playerLives { get; private set; } = 1;
+    private float playerHealth;
+    private Animator playerAnimator;
+    public float CurrentHealth() { return playerHealth; }
+    public float MaxHealth() { return maxHealth; }
+
     // Start is called before the first frame update
     void Start()
     {
+        playerHealth = maxHealth;
         playerAnimator = GetComponent<Animator>();
     }
 
@@ -29,5 +33,12 @@ public class PlayerHealth : MonoBehaviour
             Debug.Log("Life lost");
             FindObjectOfType<GameController>().ProcessDeath();
         }
+    }
+
+    public void GetHealth()
+    {
+        // Increase players health and update the UI
+        playerHealth++;
+        FindObjectOfType<GameController>().uiUpdate();
     }
 }

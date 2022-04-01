@@ -10,9 +10,9 @@ public class PlayerCombat : MonoBehaviour
 {
     [SerializeField] private Transform attackPoint;
 
-    [SerializeField] private float firstAttackRate = 2f;
-    [SerializeField] private float secondAttackRate = 4f;
-     [SerializeField] private float attackTime = 0f;
+    [SerializeField] private float firstAttackRate = 4f;
+    [SerializeField] private float secondAttackRate = 2f;
+    [SerializeField] private float attackTime = 0f;
     [SerializeField] private LayerMask enemyLayers;
     [SerializeField] private float range = 0.5f;
     private Animator playerAnimator;
@@ -44,7 +44,7 @@ public class PlayerCombat : MonoBehaviour
             if(Input.GetButtonDown("Fire2"))
             {
                 attack("secondary");
-                attackTime = Time.time + 1f / firstAttackRate;
+                attackTime = Time.time + 1f / secondAttackRate;
             }
         }
     }
@@ -89,5 +89,11 @@ public class PlayerCombat : MonoBehaviour
         }
 
         Gizmos.DrawWireSphere(attackPoint.position, range);
+    }
+
+    public void IncreaseAttackSpeed()
+    {
+        firstAttackRate--;
+        secondAttackRate--;
     }
 }
