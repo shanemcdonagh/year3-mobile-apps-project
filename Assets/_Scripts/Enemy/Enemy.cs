@@ -16,19 +16,20 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float range;
     [SerializeField] private float colliderRange;
     //[SerializeField] private int attackDamage = 1;
+    [SerializeField] private Arrow arrowPrefab;
+    [SerializeField] private Arrow arrowParent;
     [SerializeField] private BoxCollider2D boxCollider;
     private int currHealth;
     private float attackTime = Mathf.Infinity;
     private PlayerHealth playerHealth;
     private Animator enemyAnimator;
 
-
     public int EnemyPoints { get {return points;}}
     
     // Acts as a function container 
     public delegate void KilledEnemy(Enemy em);
 
-    // A listener method, which is trigger when an enemy is killed by the player
+    // A listener method, which is triggered when an enemy is killed by the player
     // Can hold any function that matches the KilledEnemy signature 
     public static KilledEnemy KilledEnemyEvent;
 
@@ -71,6 +72,10 @@ public class Enemy : MonoBehaviour
 
     private void Death()
     {
+        // Disable the current script on the GameObject
+        this.enabled = false;
+        GetComponent<EnemyController>().enabled = false;
+        
         enemyAnimator.SetBool("Dying", true);
 
         // Play audio
@@ -79,9 +84,6 @@ public class Enemy : MonoBehaviour
         // Set the enemy to a layer that the player does not collide with
         gameObject.layer = 12;
 
-        // Disable the current script on the GameObject
-        this.enabled = false;
-        GetComponent<EnemyController>().enabled = false;
 
         // Send a call to the event
         SendKilledEnemyEvent();
@@ -97,8 +99,27 @@ public class Enemy : MonoBehaviour
 
     private void processAttack()
     {
+        // If: This is a ranged enemy...
+        if(this.tag == "Enemy3")
+        {
+            enemyAnimator.SetTrigger("Firing");
+            processRangedAttack();
+        }
+
        // Attack
        enemyAnimator.SetTrigger("Attacking");
+    }
+
+    private void processRangedAttack()
+    {   
+        // Create an arrow object within its parent object
+        Arrow a = Instantiate(arrowPrefab, arrowParent.transform);
+
+        // Position the arrow to the enemy
+        a.transform.right = transform.right.normalized;
+
+        Rigidbody2D arb = a.GetComponent<Rigidbody2D>();
+        arb.velocity = transform.right * 1;
     }
 
     // Determines if player is in the enemies line of sight 

@@ -36,6 +36,7 @@ public class EnemyController : MonoBehaviour
         if (timer < 0)
         {
             direction = -direction;
+            transform.localScale = new Vector2(-1 * transform.localScale.x, transform.localScale.y);
             timer = maxTimer;
         }
         moveEnemy();

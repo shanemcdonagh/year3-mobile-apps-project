@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private float maxHealth = 3;
-    public float playerLives { get; private set; } = 1;
     private float playerHealth;
     private Animator playerAnimator;
     public float CurrentHealth() { return playerHealth; }
@@ -29,8 +28,15 @@ public class PlayerHealth : MonoBehaviour
 
         if (playerHealth <= 0)
         {
-            playerLives--;
-            Debug.Log("Life lost");
+            // Disable current script and prevent player from moving
+            this.enabled = false;
+            GetComponent<PlayerController>().enabled = false;
+
+            // Set animation and reset player health
+            playerAnimator.SetBool("Dying",true);
+            playerHealth = maxHealth;
+            
+            // Call the GameController to handle death
             FindObjectOfType<GameController>().ProcessDeath();
         }
     }
@@ -40,5 +46,16 @@ public class PlayerHealth : MonoBehaviour
         // Increase players health and update the UI
         playerHealth++;
         FindObjectOfType<GameController>().uiUpdate();
+    }
+
+    // Determines if a player was hit by an arrow
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        var arrow = collision.GetComponent<Arrow>();
+
+        if(arrow)
+        {
+            TakeDamage();
+        }
     }
 }

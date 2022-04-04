@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 280415365430027919}
   - component: {fileID: 280415365430027920}
   - component: {fileID: 2298122824997989231}
+  - component: {fileID: 112271755}
   m_Layer: 7
   m_Name: Enemy1
   m_TagString: Enemy1
@@ -73,7 +74,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 882708209
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ae44d6ca9dc728943a492226b377d3f4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -113,7 +114,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 280415365430027916}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -125,7 +126,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 6
 --- !u!61 &280415365430027920
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -139,7 +140,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.17658007, y: -0.13243514}
+  m_Offset: {x: -0.17658007, y: -0.14356065}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -150,7 +151,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.21341586, y: 0.4851297}
+  m_Size: {x: 0.21341586, y: 0.4628787}
   m_EdgeRadius: 0
 --- !u!114 &2298122824997989231
 MonoBehaviour:
@@ -164,4 +165,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c8c8f4d87b940b4082ac12cf6ca94da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 90
+  maxHealth: 3
+  points: 10
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  attackRate: 0.6
+  range: 1.15
+  colliderRange: 0.32
+  boxCollider: {fileID: 280415365430027920}
+--- !u!114 &112271755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 280415365430027916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ffb81d436b31fa4887a973030584e2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 3
+  maxTimer: 3
+  facingRight: 0

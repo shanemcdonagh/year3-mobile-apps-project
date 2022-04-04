@@ -17,12 +17,14 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private float range = 0.5f;
     private Animator playerAnimator;
     private int attackDamage = 0;
+    private BoxCollider2D contact;
 
     // Method: Called when script is initally loaded
     void Start()
     {
         // Receive the animator associated with the current GameObject
         playerAnimator = GetComponent<Animator>();
+        contact = GetComponent<BoxCollider2D>();
     }
 
     // Update is called once per frame
@@ -33,6 +35,12 @@ public class PlayerCombat : MonoBehaviour
 
     private void processAttacks()
     {
+        // If: The player is midair while attacking...
+        if(!contact.IsTouchingLayers(LayerMask.GetMask("Foreground")))
+        {   
+            return;
+        }
+
         if(Time.time >= attackTime)
         {
             if(Input.GetButtonDown("Fire1"))
@@ -53,7 +61,10 @@ public class PlayerCombat : MonoBehaviour
     private void attack(string attackType)
     {
         string trigger = "";
-        
+
+        // Play audio
+        SoundManager.Instance.PlayClip("Sword Swing");
+
         // If: Primary Attack
         if(attackType == "primary")
         {

@@ -12,6 +12,8 @@ public class GameController : MonoBehaviour
     [SerializeField] private SoundManager soundManager;
 
     private int playerScore = 00000;
+    private float maxLives = 3;
+    private float currentLives;
     private Animator playerAnimator;
     
     private PlayerHealth playerHealth;
@@ -24,7 +26,12 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
+        currentLives = maxLives;
         playerHealth = FindObjectOfType<PlayerHealth>();
+    }
+
+    private void Update()
+    {
         uiUpdate();
     }
 
@@ -47,29 +54,38 @@ public class GameController : MonoBehaviour
     public void uiUpdate()
     {
         scoreText.text = playerScore.ToString();
-        livesText.text = FindObjectOfType<PlayerHealth>().playerLives.ToString();
+        livesText.text = currentLives.ToString();
         healthText.text = FindObjectOfType<PlayerHealth>().CurrentHealth().ToString();
     }
 
-    public void ProcessDeath()
+    public IEnumerator OnPlayerDeath()
     {
-        var sceneIndex = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadSceneAsync(sceneIndex);
-        soundManager.PlayClip("Player Death");
-        uiUpdate();
+        yield return new WaitForSeconds(2.0f);
+
+        currentLives--;
 
         // Reload to a new game
-        if(playerHealth.playerLives <=0)
+        if(currentLives <=0)
         {
             SceneManager.LoadSceneAsync(0);
             Destroy(gameObject);
         }
+        else
+        {
+            //soundManager.PlayClip("Player Death");
+            var sceneIndex = SceneManager.GetActiveScene().buildIndex;
+            SceneManager.LoadSceneAsync(sceneIndex);
+        }
+    }
+
+    public void ProcessDeath()
+    {
+        StartCoroutine(OnPlayerDeath());
     }
 
     public void OnKilledEnemyEvent(Enemy e)
     {
         playerScore+= e.EnemyPoints;
-        uiUpdate();
     }
 
     // Function: Executed when object becomes active

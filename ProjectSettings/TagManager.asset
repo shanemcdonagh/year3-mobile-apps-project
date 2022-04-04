@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy1
   - Enemy2
+  - Enemy3
   layers:
   - Default
   - TransparentFX
@@ -22,7 +23,7 @@ TagManager:
   - DeadEnemy
   - Confiner
   - Decorative
-  - 
+  - Middleground
   - 
   - 
   - 
@@ -40,11 +41,14 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
   - name: Background
     uniqueID: 325567613
     locked: 0
-  - name: Default
-    uniqueID: 0
+  - name: Decorative
+    uniqueID: 2188727107
     locked: 0
   - name: Middleground
     uniqueID: 452371567
