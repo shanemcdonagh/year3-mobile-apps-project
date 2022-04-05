@@ -47,25 +47,53 @@ MonoBehaviour:
   sounds:
   - audioType: 0
     audioSource: {fileID: 0}
+    audioClip: {fileID: 8300000, guid: 19b8b91bfdcd89041ad92ce2128201e0, type: 3}
+    clipName: Button Click
+    isLooping: 0
+    playOnAwake: 0
+    volume: 1
+  - audioType: 1
+    audioSource: {fileID: 0}
+    audioClip: {fileID: 8300000, guid: c4e5ed97d2978e44a91e54986daa555d, type: 3}
+    clipName: Main Theme
+    isLooping: 1
+    playOnAwake: 1
+    volume: 1
+  - audioType: 0
+    audioSource: {fileID: 0}
+    audioClip: {fileID: 8300000, guid: 4933f8a3c43203947ad144f51cfdc026, type: 3}
+    clipName: Sword Swing
+    isLooping: 0
+    playOnAwake: 0
+    volume: 1
+  - audioType: 1
+    audioSource: {fileID: 0}
+    audioClip: {fileID: 8300000, guid: a4125f74df0a22d47a1124abb9c5509e, type: 3}
+    clipName: Level Theme
+    isLooping: 0
+    playOnAwake: 0
+    volume: 0.5
+  - audioType: 0
+    audioSource: {fileID: 0}
     audioClip: {fileID: 8300000, guid: 590d782320d69744f984b92f2f5add1c, type: 3}
     clipName: Enemy Death
     isLooping: 0
     playOnAwake: 0
     volume: 1
-  - audioType: 0
+  - audioType: 1
+    audioSource: {fileID: 0}
+    audioClip: {fileID: 8300000, guid: 491d9d69a56793e45a460b83d46c0003, type: 3}
+    clipName: Boss Music
+    isLooping: 0
+    playOnAwake: 0
+    volume: 0.5
+  - audioType: 1
     audioSource: {fileID: 0}
     audioClip: {fileID: 8300000, guid: 8be010fabe498b1439f70fbd09453de2, type: 3}
     clipName: Player Death
     isLooping: 0
     playOnAwake: 0
-    volume: 1
-  - audioType: 0
-    audioSource: {fileID: 0}
-    audioClip: {fileID: 8300000, guid: 4933f8a3c43203947ad144f51cfdc026, type: 3}
-    clipName: Player Sword
-    isLooping: 0
-    playOnAwake: 0
-    volume: 1
+    volume: 0.5
   soundFXGroup: {fileID: -1028905225689518218, guid: f3b5695b47e970943a9bb1278c8953bb, type: 2}
   musicGroup: {fileID: -2966002741999735286, guid: f3b5695b47e970943a9bb1278c8953bb, type: 2}
 --- !u!114 &195391131

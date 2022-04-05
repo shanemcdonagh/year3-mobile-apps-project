@@ -505,58 +505,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1492454066, guid: 7c52cd3c1df3c574c910d07cd4abbdd6, type: 3}
-      propertyPath: sounds.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1492454066, guid: 7c52cd3c1df3c574c910d07cd4abbdd6, type: 3}
-      propertyPath: sounds.Array.data[3].volume
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1492454066, guid: 7c52cd3c1df3c574c910d07cd4abbdd6, type: 3}
-      propertyPath: sounds.Array.data[4].volume
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1492454066, guid: 7c52cd3c1df3c574c910d07cd4abbdd6, type: 3}
-      propertyPath: sounds.Array.data[3].clipName
-      value: Level Theme
-      objectReference: {fileID: 0}
-    - target: {fileID: 1492454066, guid: 7c52cd3c1df3c574c910d07cd4abbdd6, type: 3}
-      propertyPath: sounds.Array.data[4].clipName
-      value: Sword Swing
-      objectReference: {fileID: 0}
-    - target: {fileID: 1492454066, guid: 7c52cd3c1df3c574c910d07cd4abbdd6, type: 3}
-      propertyPath: sounds.Array.data[3].audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: a4125f74df0a22d47a1124abb9c5509e, type: 3}
-    - target: {fileID: 1492454066, guid: 7c52cd3c1df3c574c910d07cd4abbdd6, type: 3}
-      propertyPath: sounds.Array.data[3].audioType
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1492454066, guid: 7c52cd3c1df3c574c910d07cd4abbdd6, type: 3}
-      propertyPath: sounds.Array.data[3].isLooping
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1492454066, guid: 7c52cd3c1df3c574c910d07cd4abbdd6, type: 3}
-      propertyPath: sounds.Array.data[4].audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 4933f8a3c43203947ad144f51cfdc026, type: 3}
-    - target: {fileID: 1492454066, guid: 7c52cd3c1df3c574c910d07cd4abbdd6, type: 3}
-      propertyPath: sounds.Array.data[4].audioType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1492454066, guid: 7c52cd3c1df3c574c910d07cd4abbdd6, type: 3}
-      propertyPath: sounds.Array.data[4].isLooping
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1492454066, guid: 7c52cd3c1df3c574c910d07cd4abbdd6, type: 3}
-      propertyPath: sounds.Array.data[3].playOnAwake
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1492454066, guid: 7c52cd3c1df3c574c910d07cd4abbdd6, type: 3}
-      propertyPath: sounds.Array.data[4].playOnAwake
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 660707584502893020, guid: 7c52cd3c1df3c574c910d07cd4abbdd6, type: 3}
       propertyPath: m_Name
       value: SoundManager
@@ -23373,10 +23321,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1346305057470475631, guid: 73e1828161739b449982234c252abccf, type: 3}
-      propertyPath: m_text
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1346305057961679560, guid: 73e1828161739b449982234c252abccf, type: 3}
       propertyPath: m_Name
       value: GameController
@@ -23427,10 +23371,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1346305057961679562, guid: 73e1828161739b449982234c252abccf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1346305059112964033, guid: 73e1828161739b449982234c252abccf, type: 3}
-      propertyPath: m_text
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -23499,29 +23439,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1199415984, guid: f3cd4982a81d6004daa3e1b1e6206ce2, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1720146484, guid: f3cd4982a81d6004daa3e1b1e6206ce2, type: 3}
-      propertyPath: speed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1720146484, guid: f3cd4982a81d6004daa3e1b1e6206ce2, type: 3}
-      propertyPath: leftBound
-      value: -15
-      objectReference: {fileID: 0}
     - target: {fileID: 1065670934702716778, guid: f3cd4982a81d6004daa3e1b1e6206ce2, type: 3}
       propertyPath: m_RootOrder
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1065670934702716778, guid: f3cd4982a81d6004daa3e1b1e6206ce2, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 3.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1065670934702716778, guid: f3cd4982a81d6004daa3e1b1e6206ce2, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 1065670934702716778, guid: f3cd4982a81d6004daa3e1b1e6206ce2, type: 3}
       propertyPath: m_LocalPosition.x

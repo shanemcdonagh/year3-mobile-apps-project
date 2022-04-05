@@ -4,14 +4,12 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    // Variables
     [SerializeField] private float speed = 3.0f;
     [SerializeField] private float maxTimer = 3.0f;
-    [SerializeField] private bool facingRight = false;
     Rigidbody2D rb;
     private Animator enemyAnimator;
-
     private Vector3 initialScale;
-
     float timer;
     int direction = -1;
 

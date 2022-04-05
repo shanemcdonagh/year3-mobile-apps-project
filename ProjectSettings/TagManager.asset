@@ -6,7 +6,7 @@ TagManager:
   tags:
   - Enemy1
   - Enemy2
-  - Enemy3
+  - Boss
   layers:
   - Default
   - TransparentFX
@@ -47,11 +47,11 @@ TagManager:
   - name: Background
     uniqueID: 325567613
     locked: 0
-  - name: Decorative
-    uniqueID: 2188727107
-    locked: 0
   - name: Middleground
     uniqueID: 452371567
+    locked: 0
+  - name: Decorative
+    uniqueID: 2188727107
     locked: 0
   - name: Foreground
     uniqueID: 1049672349

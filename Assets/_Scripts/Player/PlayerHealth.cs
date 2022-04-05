@@ -31,6 +31,10 @@ public class PlayerHealth : MonoBehaviour
             // Disable current script and prevent player from moving
             this.enabled = false;
             GetComponent<PlayerController>().enabled = false;
+            GetComponent<BoxCollider2D>().enabled = false;
+
+            // Change layer of player so enemies won't attack mid death animation
+            gameObject.layer = 12;
 
             // Set animation and reset player health
             playerAnimator.SetBool("Dying",true);
@@ -46,16 +50,5 @@ public class PlayerHealth : MonoBehaviour
         // Increase players health and update the UI
         playerHealth++;
         FindObjectOfType<GameController>().uiUpdate();
-    }
-
-    // Determines if a player was hit by an arrow
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        var arrow = collision.GetComponent<Arrow>();
-
-        if(arrow)
-        {
-            TakeDamage();
-        }
     }
 }

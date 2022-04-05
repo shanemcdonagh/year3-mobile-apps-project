@@ -4661,38 +4661,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1492454066, guid: 7c52cd3c1df3c574c910d07cd4abbdd6, type: 3}
-      propertyPath: sounds.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1492454066, guid: 7c52cd3c1df3c574c910d07cd4abbdd6, type: 3}
-      propertyPath: sounds.Array.data[0].clipName
-      value: Button Click
-      objectReference: {fileID: 0}
-    - target: {fileID: 1492454066, guid: 7c52cd3c1df3c574c910d07cd4abbdd6, type: 3}
-      propertyPath: sounds.Array.data[1].clipName
-      value: Main Theme
-      objectReference: {fileID: 0}
-    - target: {fileID: 1492454066, guid: 7c52cd3c1df3c574c910d07cd4abbdd6, type: 3}
-      propertyPath: sounds.Array.data[0].audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 19b8b91bfdcd89041ad92ce2128201e0, type: 3}
-    - target: {fileID: 1492454066, guid: 7c52cd3c1df3c574c910d07cd4abbdd6, type: 3}
-      propertyPath: sounds.Array.data[1].audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: c4e5ed97d2978e44a91e54986daa555d, type: 3}
-    - target: {fileID: 1492454066, guid: 7c52cd3c1df3c574c910d07cd4abbdd6, type: 3}
-      propertyPath: sounds.Array.data[1].audioType
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1492454066, guid: 7c52cd3c1df3c574c910d07cd4abbdd6, type: 3}
-      propertyPath: sounds.Array.data[1].isLooping
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1492454066, guid: 7c52cd3c1df3c574c910d07cd4abbdd6, type: 3}
-      propertyPath: sounds.Array.data[1].playOnAwake
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 660707584502893020, guid: 7c52cd3c1df3c574c910d07cd4abbdd6, type: 3}
       propertyPath: m_Name
       value: SoundManager
