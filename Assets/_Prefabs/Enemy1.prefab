@@ -74,7 +74,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 882708209
-  m_SortingLayer: 4
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ae44d6ca9dc728943a492226b377d3f4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -166,13 +166,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 3
-  points: 10
+  points: 100
   playerLayer:
     serializedVersion: 2
     m_Bits: 64
   attackRate: 0.6
   range: 1.15
   colliderRange: 0.32
+  winScreen: {fileID: 0}
   boxCollider: {fileID: 280415365430027920}
 --- !u!114 &112271755
 MonoBehaviour:
@@ -188,4 +189,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   maxTimer: 3
-  facingRight: 0

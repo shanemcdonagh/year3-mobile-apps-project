@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
-    // SerializeField: Can be modified within the editor, while being kept private
+    // Variables
     [SerializeField] private float speed = 15.0f;
     [SerializeField] private Transform attackPoint;
     [SerializeField] private float jumpingVelocity = 1.0f;
@@ -13,8 +13,6 @@ public class PlayerController : MonoBehaviour
     private float v;
     private bool onGround;
     private bool facingRight = true;
-
-    // Initial instance variables
     private Rigidbody2D rigid;
     private Animator playerAnimator;
 
@@ -49,24 +47,23 @@ public class PlayerController : MonoBehaviour
         // Applies velocity to player based on player input
         rigid.velocity = new Vector2(h * speed, rigid.velocity.y);
 
-        // // Prevents the player from going out-of-bounds to the left
-        // float bH = Mathf.Clamp(rigid.position.x,leftBound,10000);
-
         // Initialised to true if there is any movement along the x axis
         bool running = Mathf.Abs(rigid.velocity.x) > Mathf.Epsilon;
 
         // Set condition in running animation based on if the player is moving/idle
         playerAnimator.SetBool("Running", running);
 
-        // Set position of player based on this
-        //rigid.position = new Vector2(bH,rigid.position.y);
-
+        
+            SoundManager.Instance.PlayClip("Sword Swing");
+       
     }
 
+    // Method: Rotates the player based on movement on the x axis and current sprite direction
     private void processDirection()
     {
         if ((h < 0 && facingRight) || (h > 0 && !facingRight))
         {
+            // Switch the boolean value and rotate the gameObject
             facingRight = !facingRight;
             transform.Rotate(new Vector3(0, 180, 0));
         }
@@ -75,9 +72,9 @@ public class PlayerController : MonoBehaviour
     // Method: Checked on each frame, processes when player presses the 'Jump' key
     private void processJumping()
     {
+        // If: The player pressed to jump and they are currently on the ground
         if (Input.GetButtonDown("Jump") && onGround == true)
         {
-            Debug.Log("jumping");
             // Create movement on the y axis
             Vector2 jump = new Vector2(0f, jumpingVelocity);
 
@@ -85,18 +82,19 @@ public class PlayerController : MonoBehaviour
             rigid.velocity += jump;
         }
 
-        bool jumping = rigid.velocity.y > 0.1;
+        // Set jumping animation if the player is not on the ground
         playerAnimator.SetBool("Jumping", !onGround);
-       
+
     }
 
-
+    // Method: Executed while another collider is in contact 
     private void OnTriggerStay2D(Collider2D other)
     {
-         // Set condition in jumping animation based on if the player is moving/idle
+        // Set condition in jumping animation based on if the player is currently grounded
         onGround = true;
     }
 
+    // Method: Executed while the collider is no longer in contact
     void OnTriggerExit2D(Collider2D other)
     {
         onGround = false;

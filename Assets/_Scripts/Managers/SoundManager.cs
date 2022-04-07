@@ -8,13 +8,13 @@ public class SoundManager : MonoBehaviour
     // Used for persistence between scenes
     public const string AudioMutePref = "audioMutePref";
 
-    // Allows for methods of SoundManager to be called acoordingly
+    // Allows for methods of SoundManager to be called globally
     public static SoundManager Instance;
-
     [SerializeField] private Sound[] sounds;
     [SerializeField] private AudioMixerGroup soundFXGroup;
     [SerializeField] private AudioMixerGroup musicGroup;
 
+    // Method: First metod invoked (before Start, on object instantiation)
     private void Awake()
     {
         Instance = this;
@@ -28,6 +28,7 @@ public class SoundManager : MonoBehaviour
             AudioListener.volume = PlayerPrefs.GetFloat(AudioMutePref);
         }
 
+        // For-each: Sound found in the array
         foreach (Sound s in sounds)
         {
             s.audioSource = gameObject.AddComponent<AudioSource>();
@@ -59,7 +60,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    // Used to ensure that only one instance of a SoundManager exists in a given scene
+    // Method: Used to ensure that only one instance of a SoundManager exists in a given scene
     private void SingletonSetup()
     {
         // If: More than one GameObject contains this script...
@@ -75,28 +76,35 @@ public class SoundManager : MonoBehaviour
         }
     }
 
+    // Method: Plays a specified clip
     public void PlayClip(string clipName)
     {
         // Checks list of sounds within the sounds array and returns the sound which matches that of passed in string name
         Sound soundToPlay = Array.Find(sounds, dummySound => dummySound.clipName == clipName);
 
+        // If: The sound exists..
         if (soundToPlay != null)
         {
+            // Play the sound
             soundToPlay.audioSource.Play();
         }
     }
 
+    // Method: Stops a specified clip playing
     public void StopClip(string clipName)
     {
         // Checks list of sounds within the sounds array and returns the sound which matches that of passed in string name
         Sound soundToPlay = Array.Find(sounds, dummySound => dummySound.clipName == clipName);
 
+        // If: The sound exists..
         if (soundToPlay != null)
         {
+            // Stop the sound
             soundToPlay.audioSource.Stop();
         }
     }
 
+    // Method: Toggles mute on the audio listener and persists throughout scenes
     public void ToggleMute()
     {
         if (AudioListener.volume == 1)
@@ -112,13 +120,13 @@ public class SoundManager : MonoBehaviour
         PlayerPrefs.SetFloat(AudioMutePref, AudioListener.volume);
     }
 
+
+    // Method: Updates the mixer volume of the music and sound fx being played
     public void UpdateMixerVolume()
     {
         // Decibles work through logarithmic scale, therefore we must convert the volume float to decibles
         musicGroup.audioMixer.SetFloat("Music Volume",Mathf.Log10(SoundOptionsManager.musicVolume) * 20);
-
-        // Decibles work through logarithmic scale, therefore we must convert the volume float to decibles
-       soundFXGroup.audioMixer.SetFloat("SoundFX Volume",Mathf.Log10(SoundOptionsManager.soundFXVolume) * 20);
+        soundFXGroup.audioMixer.SetFloat("SoundFX Volume",Mathf.Log10(SoundOptionsManager.soundFXVolume) * 20);
     }
 
 }

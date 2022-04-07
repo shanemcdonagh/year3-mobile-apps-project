@@ -16,10 +16,10 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float attackRate = 0.6f;
     [SerializeField] private float range;
     [SerializeField] private float colliderRange;
-    [SerializeField] private GameObject winScreen;    
+    [SerializeField] private GameObject winScreen;
     [SerializeField] private BoxCollider2D boxCollider;
     private int currHealth;
-    private float attackTime = Mathf.Infinity;
+    private float lastAttack;
     private PlayerHealth playerHealth;
     private Animator enemyAnimator;
 
@@ -38,26 +38,32 @@ public class Enemy : MonoBehaviour
         // Retrieve component and initialise variable
         enemyAnimator = GetComponent<Animator>();
         currHealth = maxHealth;
+        lastAttack = -999f;
     }
 
     void Update()
     {
         // Update attack time each frame
-        attackTime += Time.deltaTime;
+        
 
         // If: The player is in the line of sight
         if (PlayerDetected())
         {
             // If: The time passed is greater than the attack rate
-            if (attackTime >= attackRate)
+            if (Time.time > attackRate + lastAttack)
             {
                 // Attack the player
                 processAttack();
+
+                // Play sound
+                SoundManager.Instance.PlayClip("Enemy Swing");
+
+                lastAttack = Time.time;
             }
         }
     }
 
-    // Function: When called, deals damage to the Enemy
+    // Method: When called, deals damage to the Enemy
     public void TakeDamage(int damage)
     {
         // Decrease health, set animation
@@ -72,7 +78,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    // Function: Invoked when the enemies health is depleted
+    // Method: Invoked when the enemies health is depleted
     private void Death()
     {
         // Disable the current script and controller on the GameObject
@@ -87,8 +93,9 @@ public class Enemy : MonoBehaviour
         {
             // Stop the boss music
             SoundManager.Instance.StopClip("Boss Music");
+            SoundManager.Instance.PlayClip("Victory");
 
-            if(winScreen != null)
+            if (winScreen != null)
             {
                 winScreen.SetActive(true);
             }
@@ -104,7 +111,7 @@ public class Enemy : MonoBehaviour
         SendKilledEnemyEvent();
     }
 
-    // Function: Used to send a call to any event which is listening (used in GameController)
+    // Method: Used to send a call to any event which is listening (used in GameController)
     private void SendKilledEnemyEvent()
     {
         if (KilledEnemyEvent != null)
@@ -113,14 +120,14 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    // Function: Invoked when the player is in sight and attack rate is reset
+    // Method: Invoked when the player is in sight and attack rate is reset
     private void processAttack()
     {
         // Set attack animation
         enemyAnimator.SetTrigger("Attacking");
     }
 
-    // Function: Determines if player is in the enemies line of sight 
+    // Method: Determines if player is in the enemies line of sight 
     private bool PlayerDetected()
     {
         Vector3 boxSize = new Vector3(boxCollider.bounds.size.x * range, boxCollider.bounds.size.y, boxCollider.bounds.size.z);
@@ -139,7 +146,7 @@ public class Enemy : MonoBehaviour
         return detect.collider;
     }
 
-    // Function: Draws a wireframe on the box collider of the enemy (Visual purposes only when testing in scene view)
+    // Method: Draws a wireframe on the box collider of the enemy (Visual purposes only when testing in scene view)
     private void OnDrawGizmos()
     {
         Vector3 boxSize = new Vector3(boxCollider.bounds.size.x * range, boxCollider.bounds.size.y, boxCollider.bounds.size.z);
@@ -147,13 +154,12 @@ public class Enemy : MonoBehaviour
         Gizmos.DrawWireCube(boxCollider.bounds.center + transform.right * range * transform.localScale.x * colliderRange, boxSize);
     }
 
-    // Function: Damage the player
+    // Method: Damage the player
     // To note: This method is called on the attack animation of the enemy, set as an animation event
     public void HurtPlayer()
     {
         if (PlayerDetected())
         {
-            Debug.Log("Player spotted");
             // Decrease player health by calling the public method associated with it
             playerHealth.TakeDamage();
         }

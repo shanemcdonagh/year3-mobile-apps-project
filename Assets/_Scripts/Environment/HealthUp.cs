@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class HealthUp : MonoBehaviour
 {
-    // [SerializeField] private int health = 1;
-
+    // Method: Invoked when another collider comes into contact
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // If: What came on contact was not the player..
@@ -27,6 +26,8 @@ public class HealthUp : MonoBehaviour
         // Increase the players health and update the UI    
         FindObjectOfType<PlayerHealth>().GetHealth();
         FindObjectOfType<GameController>().uiUpdate();
+
+        SoundManager.Instance.PlayClip("Enemy Swing");
         
         // Destroy the game object
         Destroy(gameObject);

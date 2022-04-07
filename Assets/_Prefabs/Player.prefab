@@ -216,11 +216,11 @@ MonoBehaviour:
   attackPoint: {fileID: 726907611}
   firstAttackRate: 2
   secondAttackRate: 4
-  attackTime: 0
+  attackTime: 3
   enemyLayers:
     serializedVersion: 2
     m_Bits: 128
-  range: 0.54
+  range: 0.8
 --- !u!70 &1561697370
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -249,4 +249,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b274d15ee8c75d44b9af2e11af1187fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 3
+  maxHealth: 5

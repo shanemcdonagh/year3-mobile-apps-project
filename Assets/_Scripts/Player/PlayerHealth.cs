@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
+    // Variables
     [SerializeField] private float maxHealth = 3;
     private float playerHealth;
     private Animator playerAnimator;
@@ -17,15 +18,17 @@ public class PlayerHealth : MonoBehaviour
         playerAnimator = GetComponent<Animator>();
     }
 
+    // Method: Called by Enemy script to process player damage
     public void TakeDamage()
     {
+        // Decrease health, and update UI values
         playerHealth--;
         FindObjectOfType<GameController>().uiUpdate();
-        Debug.Log("Damaged");
 
-        // Play player taking damage
+        // Set hurting animation
         playerAnimator.SetTrigger("Hurting");
 
+        // If: The player lives is 0 or less
         if (playerHealth <= 0)
         {
             // Disable current script and prevent player from moving
@@ -45,10 +48,11 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    // Method: Called by HealthUp script
     public void GetHealth()
     {
         // Increase players health and update the UI
-        playerHealth++;
+        playerHealth = maxHealth;
         FindObjectOfType<GameController>().uiUpdate();
     }
 }

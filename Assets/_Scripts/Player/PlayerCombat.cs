@@ -2,20 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Reference: https://youtu.be/sPiVz1k-fEs
-// This video was used to understand and apply attack damage and how to play the necessary animations
-
 public class PlayerCombat : MonoBehaviour
-
 {
+    // Variables
     [SerializeField] private Transform attackPoint;
-
     [SerializeField] private float firstAttackRate = 4f;
     [SerializeField] private float secondAttackRate = 2f;
-    [SerializeField] private float attackTime = 0f;
     [SerializeField] private LayerMask enemyLayers;
     [SerializeField] private float range = 0.5f;
     private Animator playerAnimator;
+    private float lastAttack;
     private int attackDamage = 0;
     private BoxCollider2D contact;
 
@@ -25,34 +21,54 @@ public class PlayerCombat : MonoBehaviour
         // Receive the animator associated with the current GameObject
         playerAnimator = GetComponent<Animator>();
         contact = GetComponent<BoxCollider2D>();
+
+        // Initially set to negative value so when player first attacks
+        // It happens instantly
+        lastAttack = -999f; 
     }
 
-    // Update is called once per frame
+    // Method: Called on every frame
     void Update()
     {
-       processAttacks();
+        processAttacks();
     }
 
+    // Method: Handles player attacks
     private void processAttacks()
     {
         // If: The player is midair while attacking...
-        if(!contact.IsTouchingLayers(LayerMask.GetMask("Foreground")))
-        {   
+        if (!contact.IsTouchingLayers(LayerMask.GetMask("Foreground")))
+        {
             return;
         }
 
-        if(Time.time >= attackTime)
+        // If: Primary attack
+        if (Input.GetButtonDown("Fire1"))
         {
-            if(Input.GetButtonDown("Fire1"))
+             // The time at the beginning of the frame is greater than
+            // the attack rate and the time of the last attack...
+            if(Time.time > firstAttackRate + lastAttack)
             {
+                // Use the primary attack
                 attack("primary");
-                attackTime = Time.time + 1f / firstAttackRate;
-            }
 
-            if(Input.GetButtonDown("Fire2"))
+                // Set time of last attack to current time at this frame
+                lastAttack = Time.time;
+            }
+        }
+
+        // If: Secondary attack
+        if (Input.GetButtonDown("Fire2"))
+        {
+            // The time at the beginning of the frame is greater than
+            // the attack rate and the time of the last attack...
+            if(Time.time > secondAttackRate + lastAttack)
             {
+                // Use the secondary attack
                 attack("secondary");
-                attackTime = Time.time + 1f / secondAttackRate;
+
+                // Set time of last attack to current time at this frame
+                lastAttack = Time.time;
             }
         }
     }
@@ -66,25 +82,27 @@ public class PlayerCombat : MonoBehaviour
         SoundManager.Instance.PlayClip("Sword Swing");
 
         // If: Primary Attack
-        if(attackType == "primary")
+        if (attackType == "primary")
         {
-            // Play animation
+            // Set animation type and attack damage
             trigger = "Attack1";
             attackDamage = 1;
         }
-        else if(attackType == "secondary")
+        else if (attackType == "secondary") // Secondary attack
         {
+            // Set animation type and attack damage
             trigger = "Attack2";
             attackDamage = 2;
         }
-        
+
+        // Set player animation
         playerAnimator.SetTrigger(trigger);
 
         // Detect which enemies are in range
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, range, enemyLayers);
-        
+
         // For-each: Enemy that was struck...
-        foreach(Collider2D enemy in hitEnemies)
+        foreach (Collider2D enemy in hitEnemies)
         {
             // Retrieve the component attached to the enemy and apply damage
             enemy.GetComponent<Enemy>().TakeDamage(attackDamage);
@@ -94,17 +112,13 @@ public class PlayerCombat : MonoBehaviour
     // Draws a wireframe around the attackpoint for adjusting purposes (only within the Editor)
     private void OnDrawGizmosSelected()
     {
-        if(attackPoint == null)
+        // If: There is no attackPoint specified
+        if (attackPoint == null)
         {
             return;
         }
 
+        // Draw wiresphere on attackpoint location, with a radius of the attack range
         Gizmos.DrawWireSphere(attackPoint.position, range);
-    }
-
-    public void IncreaseAttackSpeed()
-    {
-        firstAttackRate--;
-        secondAttackRate--;
     }
 }

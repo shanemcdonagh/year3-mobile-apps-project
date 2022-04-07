@@ -12,10 +12,11 @@ public class PauseMenu : MonoBehaviour
     // Used to set the pause menu to active/inactive
     [SerializeField] private GameObject PauseMenuUI;
 
+    // Method: Called every frame
     void Update()
     {
         // If: The user pressed the Escape key
-        if(Input.GetKeyDown(KeyCode.Escape) && SceneManager.GetActiveScene().buildIndex != 0)
+        if(Input.GetKeyDown(KeyCode.Escape))
         {
             // If: The game is already paused..
             if(GamePaused)
@@ -31,6 +32,7 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
+    // Method: Closes the UI and resets game-time to normal
     public void ResumeGame()
     {
         // Set menu to false and restore time
@@ -39,6 +41,7 @@ public class PauseMenu : MonoBehaviour
         GamePaused = false;
     }
 
+    // Method: Opens the UI and sets game time to zero
     private void PauseGame()
     {
         // Set menu to true and slow down time
@@ -47,6 +50,7 @@ public class PauseMenu : MonoBehaviour
         GamePaused = true;
     }
 
+    // Method: Resets the game time back to normal and loads in menu
     public void LoadMenu()
     {
         // Reset time back to normal and load the menu
@@ -54,6 +58,7 @@ public class PauseMenu : MonoBehaviour
         SceneManager.LoadSceneAsync(0);
     }
 
+    // Method: Quits the game
     public void QuitGame()
     {
         // Quit the game (Only works in build, not in editor)
