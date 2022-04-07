@@ -51,11 +51,7 @@ public class PlayerController : MonoBehaviour
         bool running = Mathf.Abs(rigid.velocity.x) > Mathf.Epsilon;
 
         // Set condition in running animation based on if the player is moving/idle
-        playerAnimator.SetBool("Running", running);
-
-        
-            SoundManager.Instance.PlayClip("Sword Swing");
-       
+        playerAnimator.SetBool("Running", running);       
     }
 
     // Method: Rotates the player based on movement on the x axis and current sprite direction

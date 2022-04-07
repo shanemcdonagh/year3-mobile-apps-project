@@ -29,7 +29,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8412186453183538462}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -86.04, y: -6.1, z: 104.570755}
   m_LocalScale: {x: -3, y: 3, z: 1}
   m_Children: []
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 882708209
   m_SortingLayer: 6
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f28e5060b1c87274280e20a11304db5a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: af16cb225967af543b9c764da4690c2e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -166,15 +166,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 3
-  points: 20
+  points: 300
   playerLayer:
     serializedVersion: 2
     m_Bits: 64
   attackRate: 0.6
   range: 2.65
   colliderRange: 0.27
-  arrowPrefab: {fileID: 0}
-  arrowParent: {fileID: 0}
+  winScreen: {fileID: 0}
   boxCollider: {fileID: 8412186453183538434}
 --- !u!114 &8600234028406080414
 MonoBehaviour:

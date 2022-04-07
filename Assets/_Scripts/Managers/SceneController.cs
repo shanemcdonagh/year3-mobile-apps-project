@@ -12,7 +12,25 @@ public class SceneController : MonoBehaviour
     private void Awake() 
     {
         // Set as singleton
-       // SingletonSetup();    
+        SingletonSetup();    
+    }
+
+    // Called after Awake()
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+       
+      // Changes music theme where applicable
+      if(scene.buildIndex < 6)
+      {
+        SoundManager.Instance.StopClip("Boss Music");
+        SoundManager.Instance.PlayClip("Level Music");
+      }
+
+      if(scene.buildIndex == 6)
+      {
+        SoundManager.Instance.StopClip("Level Music");
+        SoundManager.Instance.PlayClip("Boss Music");
+      }
     }
 
     // Method: Loads the next level in the build index

@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 
 public class SoundManager : MonoBehaviour
 {
@@ -18,8 +19,6 @@ public class SoundManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-
-        //SingletonSetup();
 
         //If a player pref was set for audio mute
         if (PlayerPrefs.HasKey(AudioMutePref))
@@ -60,20 +59,14 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    // Method: Used to ensure that only one instance of a SoundManager exists in a given scene
-    private void SingletonSetup()
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // If: More than one GameObject contains this script...
-        if (FindObjectsOfType(GetType()).Length > 1)
-        {
-            // Destroy current gameObject
-            Destroy(gameObject);
-        }
-        else
-        {
-            // Persist the gameObject
-            DontDestroyOnLoad(gameObject);
-        }
+       
+      // Changes music theme where applicable
+      if(scene.buildIndex == 0)
+      {
+          Destroy(gameObject);
+      }
     }
 
     // Method: Plays a specified clip
