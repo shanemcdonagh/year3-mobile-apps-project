@@ -41,6 +41,12 @@ public class PauseMenu : MonoBehaviour
         GamePaused = false;
     }
 
+    // Method: Closes the UI and resets game-time to normal
+    public void ToggleMute()
+    {
+        FindObjectOfType<SoundManager>().ToggleMute();
+    }
+
     // Method: Opens the UI and sets game time to zero
     private void PauseGame()
     {

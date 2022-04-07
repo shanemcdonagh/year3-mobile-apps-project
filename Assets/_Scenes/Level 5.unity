@@ -75811,7 +75811,11 @@ PrefabInstance:
     - target: {fileID: 1484755996, guid: 73e1828161739b449982234c252abccf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1593511127}
+      objectReference: {fileID: 2037433541}
+    - target: {fileID: 1484755996, guid: 73e1828161739b449982234c252abccf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ToggleMute
+      objectReference: {fileID: 0}
     - target: {fileID: 1346305057961679560, guid: 73e1828161739b449982234c252abccf, type: 3}
       propertyPath: m_Name
       value: GameController
@@ -75866,6 +75870,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 73e1828161739b449982234c252abccf, type: 3}
+--- !u!114 &2037433541 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1437171417, guid: 73e1828161739b449982234c252abccf, type: 3}
+  m_PrefabInstance: {fileID: 2037433540}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 277b412f99353654ba2f5fed82aba2ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2058350396
 PrefabInstance:
   m_ObjectHideFlags: 0
