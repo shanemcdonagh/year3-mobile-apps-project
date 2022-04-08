@@ -2,10 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Reference: https://youtu.be/sPiVz1k-fEs
-// Reference: https://youtu.be/d002CljR-KU
-// This video was used to understand and apply attack damage and how to play the necessary animations
-
 public class Enemy : MonoBehaviour
 {
 
