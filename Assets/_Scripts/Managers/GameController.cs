@@ -54,9 +54,9 @@ public class GameController : MonoBehaviour
     private void Update()
     {
         // Invoke ui update 
-        uiUpdate();
+        uiUpdate();   
     }
-    
+
     // Method: Reset the players lives
     public void ResetLives()
     {
@@ -74,17 +74,27 @@ public class GameController : MonoBehaviour
     // called after OnEnable
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // Reset the timer back to normal time (set to slowmo by exit point)
-        Time.timeScale = 1.0f;
 
-        // If: The level loaded is the menu..
-        if (scene.buildIndex == 0)
+        if (gameObject != null)
         {
-            if (gameObject != null)
+            // Reset the timer back to normal time (set to slowmo by exit point)
+            Time.timeScale = 1.0f;
+
+            // If: The level loaded is the menu..
+            if (scene.buildIndex == 0)
             {
-                // Destroy the GameController
-                Destroy(gameObject);
-            }
+                // Disable the game controller and pause menu script, hiding the in-game canvas as well
+                this.GetComponent<GameController>().enabled = false;
+                transform.GetChild(0).gameObject.GetComponent<PauseMenu>().enabled = false;
+                transform.GetChild(0).gameObject.SetActive(false);
+            }   
+            else
+            {
+                // Re-enable the scripts and menu
+                this.GetComponent<GameController>().enabled = true;
+                transform.GetChild(0).gameObject.SetActive(true);
+                transform.GetChild(0).gameObject.GetComponent<PauseMenu>().enabled = true;
+            }  
         }
     }
 
@@ -106,12 +116,15 @@ public class GameController : MonoBehaviour
     // Method: Updates the Player UI based on the current values
     public void uiUpdate()
     {
-        scoreText.text = playerScore.ToString();
-        livesText.text = PlayerPrefs.GetFloat(Health).ToString();
-        healthText.text = FindObjectOfType<PlayerHealth>().CurrentHealth().ToString();
+        if (gameObject != null)
+        {
+            scoreText.text = playerScore.ToString();
+            livesText.text = PlayerPrefs.GetFloat(Health).ToString();
+            healthText.text = FindObjectOfType<PlayerHealth>().CurrentHealth().ToString();
 
-        // Set player preference
-        PlayerPrefs.SetFloat(HighScore, playerScore);
+            // Set player preference
+            PlayerPrefs.SetFloat(HighScore, playerScore);
+        }
     }
 
     // Method: Process the players death
@@ -123,7 +136,7 @@ public class GameController : MonoBehaviour
         // Decrement current lives and update the player preferences
         currentLives--;
         PlayerPrefs.SetFloat(Health, currentLives);
- 
+
         // Reload to a new game
         if (currentLives <= 0)
         {

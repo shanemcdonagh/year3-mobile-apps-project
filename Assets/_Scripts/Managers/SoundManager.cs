@@ -59,16 +59,6 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-       
-      // Changes music theme where applicable
-      if(scene.buildIndex == 0)
-      {
-          Destroy(gameObject);
-      }
-    }
-
     // Method: Plays a specified clip
     public void PlayClip(string clipName)
     {

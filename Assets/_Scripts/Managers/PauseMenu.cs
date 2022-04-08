@@ -59,7 +59,8 @@ public class PauseMenu : MonoBehaviour
     // Method: Resets the game time back to normal and loads in menu
     public void LoadMenu()
     {
-        // Reset time back to normal and load the menu
+        // Deactive the pause menu when menu is loaded
+        transform.GetChild(3).gameObject.SetActive(false);
         Time.timeScale = 1f;
         SceneManager.LoadSceneAsync(0);
     }
